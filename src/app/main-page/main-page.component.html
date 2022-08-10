@@ -1,0 +1,342 @@
+<div class="container">
+  <h1 class="header">Configurations / Thresholds</h1>
+  <br />
+  <mat-card @fade>
+    <h4 class="card-heading">THRESHOLDS</h4>
+    <br />
+
+    <!-- <div class="canvas-row d-flex">
+        <div class="canvas-title d-flex flex-column edit-titles" style="background-color: rgb(251, 118, 13);">
+        <h6 class="tab-txt edit">Category Name</h6>
+        </div>
+        <div class="canvas-tree flex-grow-1 p-2 pr-5">
+            <a class="add-toggle-tree tree-add-action">
+                <i class="fas fa-plus mr-1"></i>
+                Add main Threshold 
+            </a>
+        </div>
+    </div> -->
+    <div [formGroup]="newCategory">
+    <div  class="category" formArrayName="newCat" *ngFor="let newCat of newCat.controls ; let i=index">
+        <div class="canvas-title d-flex flex-column edit-titles" >
+            <h6 formControlName="namee">Category Name</h6>
+        </div>
+        <div class="add_thres">
+        <i class="fa fa-plus add-icon"></i>
+      <span class="add_cate">Add main Threshold </span>
+    </div>
+    </div>
+</div>
+
+    <p class="add" (click)="openModal()">
+      <i class="fa fa-plus add-icon"></i>
+      <span class="add_cate">Add New Category</span>
+    </p>
+  </mat-card>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Category</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+        <form [formGroup]="categoryForm">
+          <div class="modal-body">
+            <div class="modal-div">
+              <div class="row">
+                <div class="col-sm-12 mb-2">
+                  <div class="form-container mt-3">
+                    <div class="options-group">
+                      <div class="form-group" formGroupName="language">
+                        <div class="row d-flex">
+                          <div class="col-sm-4">
+                            <label>Language</label>
+                            <select
+                              formControlName="languageName"
+                              class="form-control"
+                            >
+                              <option value="English" selected>English</option>
+                              <option value="Arabic">Arabic</option>
+                              <option value="French">French</option>
+                              <option value="Chinese">Chinese</option>
+                            </select>
+                          </div>
+                          <div class="flex-grow-1">
+                            <label>Category Name</label>
+                            <input
+                              formControlName="categoryName"
+                              type="text"
+                              placeholder="Category Name"
+                              id="forceTitleInput"
+                              class="form-control"
+                            />
+                          </div>
+                          <div class="hidden">
+                            <span
+                              class="action-icon remove-icon ml-2 lang-action"
+                            ></span>
+                          </div>
+                          <div class="col-sm-12 mt-2">
+                            <label for="exampleFormControlTextarea1">
+                              Description
+                            </label>
+                            <textarea
+                              formControlName="description"
+                              class="form-control text-area"
+                              placeholder="Enter Description"
+                              rows="2"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <hr />
+                        <div
+                          formArrayName="moreLanguages"
+                          *ngFor="
+                            let lang of moreLanguages.controls;
+                            let i = index
+                          "
+                        >
+                          <div class="row d-flex">
+                            <div class="col-sm-4">
+                              <label>Language</label>
+                              <select
+                                formControlName="languageName"
+                                class="form-control"
+                              >
+                                <option value="English" selected>
+                                  English
+                                </option>
+                                <option value="Arabic">Arabic</option>
+                                <option value="French">French</option>
+                                <option value="Chinese">Chinese</option>
+                              </select>
+                            </div>
+                            <div class="flex-grow-1">
+                              <label>Category Name</label>
+                              <input
+                                formControlName="categoryName"
+                                type="text"
+                                placeholder="Category Name"
+                                id="forceTitleInput"
+                                class="form-control"
+                              />
+                            </div>
+                            <div class="hidden">
+                              <span
+                                class="action-icon remove-icon ml-2 lang-action"
+                              ></span>
+                            </div>
+                            <div class="col-sm-12 mt-2">
+                              <label for="exampleFormControlTextarea1">
+                                Description
+                              </label>
+                              <textarea
+                                formControlName="description"
+                                class="form-control text-area"
+                                placeholder="Enter Description"
+                                rows="2"
+                              ></textarea>
+                            </div>
+                          </div>
+                          <hr />
+                        </div>
+                      </div>
+                      <button
+                        class="btn addNewLang add-btn"
+                        (click)="moreLanguage()"
+                      >
+                        <i class="fa fa-plus add-btn-icon"></i> Add Language
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 mb-2">
+                  <div class="form-container mt-3">
+                    <div class="form-group" formGroupName="colors">
+                      <label>Colors</label>
+                      <div class="row all-colors">
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box orange active"
+                            (click)="setColorName('#FB760D')"
+                            title="#FB760D"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box red"
+                            (click)="setColorName('#B71E3E')"
+                            title="#B71E3E"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box yellow"
+                            (click)="setColorName('#f7a532')"
+                            title="#f7a532"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box green"
+                            (click)="setColorName('#21CC97')"
+                            title="#21CC97"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box turkuaz"
+                            (click)="setColorName('#109aa4')"
+                            title="#109aa4"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box blue"
+                            (click)="setColorName('#6599FF')"
+                            title="#6599FF"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box gray"
+                            (click)="setColorName('#464646')"
+                            title="#464646"
+                          ></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                          <div
+                            class="single-color-box light-gray"
+                            (click)="setColorName('#8b8b8b')"
+                            title="#8b8b8b"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 mb-2">
+                  <div class="form-container mt-3">
+                    <div class="form-group" formGroupName="responsibilities">
+                      <div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <label>Responsiblities</label>
+                          </div>
+                        </div>
+                        <div class="row d-flex">
+                          <div class="col-sm-12 col-md-6">
+                            <!-- <input type="text" class="form-control"/> -->
+                            <select
+                              formControlName="person"
+                              class="form-control"
+                            >
+                              <option value="Muhammad Abdullah" selected>
+                                Muhammad Abdullah
+                              </option>
+                              <option value="Muhammad Abdullah">
+                                Muhammad Abdullah
+                              </option>
+                              <option value="Muhammad Abdullah">
+                                Muhammad Abdullah
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-sm-12 col-md-4">
+                            <select
+                              formControlName="personCategory"
+                              class="form-control"
+                            >
+                              <option selected value="Guest">Guest</option>
+                              <option value="Leader">Leader</option>
+                              <option value="Editor">Editor</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-12 col-md-2 mt-2 text-danger">
+                            <i class="fa fa-trash"></i>
+                          </div>
+                        </div>
+                        <br />
+                        <div
+                          formArrayName="moreResp"
+                          *ngFor="let res of moreResp.controls; let i = index"
+                        >
+                          <div class="row d-flex">
+                            <div class="col-sm-12 col-md-6">
+                              <!-- <input type="text" class="form-control"/> -->
+                              <select
+                                formControlName="person"
+                                class="form-control"
+                              >
+                                <option value="Muhammad Abdullah" selected>
+                                  Muhammad Abdullah
+                                </option>
+                                <option value="Muhammad Abdullah">
+                                  Muhammad Abdullah
+                                </option>
+                                <option value="Muhammad Abdullah">
+                                  Muhammad Abdullah
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                              <select
+                                formControlName="role"
+                                class="form-control"
+                              >
+                                <option selected value="Guest">Guest</option>
+                                <option value="Leader">Leader</option>
+                                <option value="Editor">Editor</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-12 col-md-2 mt-2 text-danger">
+                              <i class="fa fa-trash"></i>
+                            </div>
+                          </div>
+                          <br />
+                        </div>
+                      </div>
+
+                      <button
+                        class="btn addNewLang add-btn mt-4"
+                        (click)="moreRes()"
+                      >
+                        <i class="fa fa-plus add-btn-icon"></i> Add
+                        Responsiblities
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-default save-btn"
+              (click)="submit()"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-default cancel-btn"
+              (click)="onCloseHandled()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
